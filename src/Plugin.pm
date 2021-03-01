@@ -1134,9 +1134,9 @@ sub getTracksForResult {
 		}
 	}elsif($contentType eq 'artist') {
 		if($noRepeat) {
-			$sql = "select tracks.id from tracks join contributor_track on tracks.id=contributor_track.track and contributor_track.role = 5 left join dynamicplaylist_history on tracks.id=dynamicplaylist_history.id where dynamicplaylist_history.id is null and contributor_track.contributor=$item group by tracks.id";
+			$sql = "select tracks.id from tracks join contributor_track on tracks.id=contributor_track.track and contributor_track.role in (1,4,5,6) left join dynamicplaylist_history on tracks.id=dynamicplaylist_history.id where dynamicplaylist_history.id is null and contributor_track.contributor=$item group by tracks.id";
 		}else {
-			$sql = "select tracks.id from tracks join contributor_track on tracks.id=contributor_track.track and contributor_track.role = 5 where contributor_track.contributor=$item group by tracks.id";
+			$sql = "select tracks.id from tracks join contributor_track on tracks.id=contributor_track.track and contributor_track.role in (1,4,5,6) where contributor_track.contributor=$item group by tracks.id";
 		}
 		if($limit) {
 			if($driver eq 'mysql') {
